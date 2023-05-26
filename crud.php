@@ -5,15 +5,28 @@ $error = '';
 $data = '';
 $msg='';
 $estado=false;
+$estadoDeCarga='';
 if (isset($_FILES['image'])) {
     $error="Se cargo el archivo";
     $estado=true;
-    $data=['error' => $error,'estado' => $estado];
 } else {
     $error="El archivo no se ha cargado";
     $estado=false;
-    $data=['error' => $error,'estado' => $estado];
+} 
+if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
+    // El archivo se cargó correctamente
+    $estadoDeCarga='1';
+} elseif ($_FILES['image']['error'] === UPLOAD_ERR_NO_FILE) {
+    // No se seleccionó ningún archivo
+    $estadoDeCarga='2';
+} elseif ($_FILES['image']['error'] === UPLOAD_ERR_INI_SIZE || $_FILES['image']['error'] === UPLOAD_ERR_FORM_SIZE) {
+    // El archivo excede el tamaño máximo permitido
+    $estadoDeCarga='3';
+} else {
+    // Otro error durante la carga del archivo
+    $estadoDeCarga='4';
 }
+$data=['error' => $error,'estado' => $estado,'estadoDeCarga' => $estadoDeCarga];
 $file = $_FILES["image"]["name"]; //Nombre de nuestro archivo
 
 $url_temp = $_FILES["image"]["tmp_name"]; //Ruta temporal a donde se carga el archivo 
