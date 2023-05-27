@@ -27,7 +27,7 @@ if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
     $estadoDeCarga='4';
 }
 $data=['error' => $error,'estado' => $estado,'estadoDeCarga' => $estadoDeCarga,'msg'=>$msg];
-/*$file = $_FILES["image"]["name"]; //Nombre de nuestro archivo
+$file = $_FILES["image"]["name"]; //Nombre de nuestro archivo
 
 $url_temp = $_FILES["image"]["tmp_name"]; //Ruta temporal a donde se carga el archivo 
 
@@ -42,5 +42,5 @@ if (move_uploaded_file($url_temp, $url_target)) {
     echo "El archivo ha sido cargado con éxito.";
 } else {
     echo "Ha habido un error al cargar tu archivo.";
-}*/
+}
 print json_encode($data, JSON_UNESCAPED_UNICODE);
