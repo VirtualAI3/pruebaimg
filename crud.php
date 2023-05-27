@@ -58,7 +58,7 @@ if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
     // Otro error durante la carga del archivo
     $estadoDeCarga='4';
 }
-$data=['error' => $error,'estado' => $estado,'estadoDeCarga' => $estadoDeCarga];
+$data=['error' => $error,'estado' => $estado,'estadoDeCarga' => $estadoDeCarga,'msg'=>$msg];
 /*$file = $_FILES["image"]["name"]; //Nombre de nuestro archivo
 
 $url_temp = $_FILES["image"]["tmp_name"]; //Ruta temporal a donde se carga el archivo 
