@@ -12,8 +12,7 @@ if (isset($_FILES['image'])) {
     $ruta_temporal = $_FILES['image']['tmp_name'];
 
     // Obtener información de la imagen
-    $info = getimagesize($ruta_temporal);
-    $tipo = $info['mime'];
+    $info = getimagesize($_FILES['image']);
 
     // Crear una imagen a partir del archivo temporal
     $msg=$info;
