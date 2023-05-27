@@ -9,13 +9,6 @@ $estadoDeCarga='';
 if (isset($_FILES['image'])) {
     $error="Se cargo el archivo";
     $estado=true;
-    $ruta_temporal = $_FILES['image']['tmp_name'];
-
-    // Obtener información de la imagen
-    $info = getimagesize($_FILES['image']);
-
-    // Crear una imagen a partir del archivo temporal
-    $msg=$info;
 } else {
     $error="El archivo no se ha cargado";
     $estado=false;
