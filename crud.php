@@ -9,13 +9,6 @@ $estadoDeCarga='';
 if (isset($_FILES['image'])) {
     $error="Se cargo el archivo";
     $estado=true;
-} else {
-    $error="El archivo no se ha cargado";
-    $estado=false;
-} 
-if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
-    // El archivo se cargó correctamente
-    $estadoDeCarga='1';
     $ruta_temporal = $_FILES['image']['tmp_name'];
 
     // Obtener información de la imagen
@@ -23,31 +16,14 @@ if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
     $tipo = $info['mime'];
 
     // Crear una imagen a partir del archivo temporal
-    $imagen = null;
-    if ($tipo === 'image/jpeg' || $tipo === 'image/jpg') {
-        $imagen = imagecreatefromjpeg($ruta_temporal);
-    } elseif ($tipo === 'image/png') {
-        $imagen = imagecreatefrompng($ruta_temporal);
-    }
-
-    // Comprimir la imagen
-    if ($imagen !== null) {
-        // Nueva calidad de compresión (ajusta este valor según tus necesidades)
-        $nueva_calidad = 80;
-
-        // Ruta donde se guardará la imagen comprimida
-        $ruta_destino = dirname(__FILE__) . "/images";
-
-        $nueva_ruta_destino=str_replace('\\', '/', $ruta_destino)."/compressed_image.jpg";
-
-        // Guardar la imagen comprimida en el destino
-        imagejpeg($imagen, $nueva_ruta_destino, $nueva_calidad);
-        imagedestroy($imagen);
-
-        $msg = "La imagen se comprimió y guardó con éxito.";
-    } else {
-        $msg = "Error al crear la imagen.";
-    }
+    $msg=$info;
+} else {
+    $error="El archivo no se ha cargado";
+    $estado=false;
+} 
+if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
+    // El archivo se cargó correctamente
+    $estadoDeCarga='1';
 } elseif ($_FILES['image']['error'] === UPLOAD_ERR_NO_FILE) {
     // No se seleccionó ningún archivo
     $estadoDeCarga='2';
